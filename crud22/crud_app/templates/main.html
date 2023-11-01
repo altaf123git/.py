@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+
+
+
+  <!-- Section: Split screen -->
+  <br>
+  <br>
+  <a href="logout" class="btn btn-danger" role="button">LOGOUT</a>
+<br>
+<br>
+<section class="">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 vh-100 bg-secondary">
+        <form method='post' enctype="multipart/form-data">
+          {% csrf_token %}
+          <h2>Add Emplyee</h2>
+      
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" class="form-control" name='name'>
+          </div>
+      
+          <div class="mb-3">
+              <label>Email</label>
+              <input type="text" class="form-control" name='email'>
+            </div>
+      
+            <div class="mb-3">
+              <label>City</label>
+              <input type="text" class="form-control" name='city'>
+            </div>
+          
+            <div class="mb-3">
+              <label>Pan</label>
+              <input type="file" class="form-control" name='pan'>
+            </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      
+      </div>
+      <div class="col-lg-9 vh-100 bg-">
+        <h2>Employee Detail's</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sr</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">City</th>
+              <th scope="col">Pan</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          {% for i in data %}
+          <tbody>
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{i.name}}</td>
+              <td>{{i.email}}</td>
+              <td>{{i.city}}</td>
+              <td>{{i.pan}}</td>
+              <td><a href="update/{{i.id}}" class="btn btn-primary" role="button">Update</a> <a href="delete/{{i.id}}" class="btn btn-danger" role="button">Delete</a>
+              </td>
+            </tr>
+            <tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- Section: Split screen -->
+  {% endblock body %}

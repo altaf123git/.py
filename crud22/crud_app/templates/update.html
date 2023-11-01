@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+
+
+<form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Update {{record.name}}'s Record</h2>
+
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" name='name' value={{record.name}}>
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="text" class="form-control" name='email' value={{record.email}}>
+      </div>
+
+      <div class="mb-3">
+        <label>City</label>
+        <input type="text" class="form-control" name='city' value={{record.city}}>
+      </div>
+    
+      <div class="mb-3">
+        <label>Pan</label>
+        <input type="file" class="form-control" name='pan' value={{record.pan}}>
+      </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+
+{% endblock body %}

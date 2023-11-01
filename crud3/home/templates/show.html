@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h3>Record's</h3>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Sr.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Course</th>
+        <th scope="col">College</th>
+        <th scope="col">Id_Photo</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.name}}</td>
+        <td>{{i.course}}</td>
+        <td>{{i.college}}</td>
+        <td>{{i.id_card}}</td>
+        <td><a href="update/{{i.id}}" class="btn btn-primary btn-lg" role="button">Update</a>
+            <a href="delete/{{i.id}}" class="btn btn-danger btn-lg" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+{% endblock body %}

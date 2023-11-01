@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="logout" class="btn btn-danger btn-lg active">Logout</a>
+<br>
+<br>
+<h3>Upload Csv File</h3>
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="excel_file">
+    <button type="submit">Upload</button>
+</form>
+<br>
+<br>
+{% comment %} <form>
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+</form>
+<!-- csv_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Data</title>
+</head>
+<body>
+    <h1>CSV Data</h1>
+    <table class=table>
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>Name</th>
+                <th>Gender </th>
+                <th>Department</th>
+                <th>Dob </th>
+                <th>City </th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% if d %}
+            {% for row in d %}
+                <tr>
+                    <td>{{ row.index }}</td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.gender }}</td>
+                    <td>{{ row.department }}</td>
+                    <td>{{ row.dob }}</td>
+                    <td>{{ row.city }}</td>
+                    <!-- Repeat for additional columns -->
+                </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table> {% endcomment %}
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+    <table class=table id="myTable">
+      <tr class="header">
+        <th>Sr.</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>DOB</th>
+        <th>City</th>
+      </tr>
+      {% if d %}
+      {% for row in d %}
+       <tr>
+        <td>{{row.index}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.gender}}</td>
+        <td>{{row.department}}</td>
+        <td>{{row.dob}}</td>
+        <td>{{row.city}}</td>
+       </tr> 
+      
+      {% endfor %}
+      {% endif %}
+      
+    </table>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+        }
+      }
+   
+    </script>
+
+</body>
+</html>
+
+{% endblock body %}

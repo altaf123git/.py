@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} create {% endblock title %}
+
+{% block body %}
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+
+<h1>Add Emplyee Detail's</h1>
+<div class="container">
+  <form class='col-6 mx-auto  card p-3 shadow-lg' method='post' enctype='multipart/form-data'>
+
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" id="name" name='name' aria-describedby="emailHelp">
+      </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">City</label>
+      <input type="text" class="form-control" id="city" name='city'>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Dob</label>
+        <input type="date" class="form-control" id="dob" name='dob'>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Adhaar</label>
+        <input type="file" class="form-control" id="adhaar" name='adhaar'>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
